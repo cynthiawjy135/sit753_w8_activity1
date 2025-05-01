@@ -11,14 +11,12 @@ pipeline{
                 echo "Fetch the source code from the directory path specified by the environment variable: ${env.DIRECTORY_PATH}"
                 echo "Compile the code and generate any necessary artefacts"
             }
-            post {
-                always {
-                    script {
-                        if (currentBuild.result == 'SUCCESS') {
-                            mail to: "prettybluesky@gmail.com",
-                                 subject: "Build Status Email - SUCCESS",
-                                 body: "Build was successful. The code has been successfully built."
-                        }
+            post{
+                success{
+                    always{
+                        mail to: "prettybluesky@gmail.com",
+                        subject: "Build Status Email"
+                        body: "Build was successful"
                     }
                 }
             }
